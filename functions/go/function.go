@@ -39,7 +39,9 @@ func WriteToBigQuery(name string) {
         //コンテキスト取得と使用するProject指定
         ctx := context.Background()
         projectID := os.Getenv("GCP_PROJECT")
-
+	datasets  := os.Getenv("GCP_DATASET")
+	tablenames := os.Getenv("GCP_TABLENAME")
+	
         //BigQuery操作用クライアント
         client, err := bigquery.NewClient(ctx, projectID)
         if err != nil {
@@ -50,8 +52,9 @@ func WriteToBigQuery(name string) {
         defer client.Close()
 
         //テーブル操作用アップローダー
-        u := client.Dataset("DATASET").Table("NAMES").Uploader()
-
+        // u := client.Dataset("DATASET").Table("NAMES").Uploader()
+        u := client.Dataset(datasets).Table(tablenames).Uploader()
+	
         items := []Data{data}
 
         // data put
