@@ -3,13 +3,24 @@ package p
 
 import (
 	"context"
+	"fmt"
 	"log"
+	"net/http"
+	"os"
+	"time"
+	"cloud.google.com/go/bigquery"
 )
 
 // PubSubMessage is the payload of a Pub/Sub event. Please refer to the docs for
 // additional information regarding Pub/Sub events.
 type PubSubMessage struct {
 	Data []byte `json:"data"`
+}
+
+//BigQueryにデータを追加するための構造体、タグで変数とキーを紐づける
+type Data struct {
+        Id     string    `bigquery:"ID"`
+        Datetime time.Time `bigquery:"DATETIME"`
 }
 
 // HelloPubSub consumes a Pub/Sub message.
