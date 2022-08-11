@@ -17,3 +17,36 @@ func HelloPubSub(ctx context.Context, m PubSubMessage) error {
 	log.Println(string(m.Data))
 	return nil
 }
+// load Puib/Sub message to bigquery
+func WriteToBigQuery(name string) {
+
+        // データ格納
+        data := Data{}
+        data.Id = id
+        data.Datetime = time.Now()
+
+        //コンテキスト取得と使用するProject指定
+        ctx := context.Background()
+        projectID := os.Getenv("GCP_PROJECT")
+
+        //BigQuery操作用クライアント
+        client, err := bigquery.NewClient(ctx, projectID)
+        if err != nil {
+                log.Printf("BigQuery接続エラー　Error:%T message: %v", err, err)
+                return
+        }
+
+        defer client.Close()
+
+        //テーブル操作用アップローダー
+        u := client.Dataset("DATASET").Table("NAMES").Uploader()
+
+        items := []Data{data}
+
+        // data put
+        err = u.Put(ctx, items)
+        if err != nil {
+                log.Printf("データ書き込みエラー　Error:%T message: %v", err, err)
+                return
+        }
+}
