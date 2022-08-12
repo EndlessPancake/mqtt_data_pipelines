@@ -1,28 +1,29 @@
 # mqtt_data_pipelines
-- 大規模MQTTクライアントからのデータパイプライン実装検討
+- 大規模MQTTクライアントからのデータパイプライン実装検討/実証
 ## 全体機能概要
 - データ入り口
-  - MQTT gatewayの様な外界からの入り口を構成
-  - GCP IoT Core の様なPublic Cloud機能には依存しない構成を取る
+  - "MQTT gateway" 外界からの入り口を構成
+  - GCP IoT Core の様なPublic Cloud機能には依存しない構成とする
 - データハブ(中継)
   - GCP pub/sub を採用
 - データパイプライン
-  - cloud functions を採用
-  * *GCP dataflow による実装は別途検討*
-  * *GKE上にfluentおよびpluginで実装も可能*
+  - cloud functions
+  - cloud dataflow(Apache Airflow)
+  
 - データ保管
-  - bigqueryを採用
-- data studio or looker
+  - bigquery を採用
+- Data studio or looker
   - サンプルデータなのでCountだけを表示する
-## GCP上のデータフロー
-- 
+### データフロー概要
+- Simple workload 
 ```
-|MQTT Clinent or Benchmark| --> [GKE(Data Stream pipelines)] --> [cloud pub/sub] <-- [cloud functions] --> [BigQuery] <-- [Data Studio]
-
+|MQTT Clinent or Benchmark| --> [GKE(Data Injest and route)] --> [cloud pub/sub] <-- [cloud functions] --> [BigQuery] <-- [Data Studio]
 ```
-### Client 
-- [go client](https://github.com/krylovsk/mqtt-benchmark)
-### GKE(Data Stream pipelines)
-- IN:(fluent-bit + mqtt plugin) , OUT(fluent-bit +pub/sub plugin)
-### 
-- 
+- Heave workload
+|MQTT Clinents| --> [GKE(Data Injest and route)] --> [cloud pub/sub] <-- [dataflows(airflow)] --> [BigQuery] <-- [Data Studio]
+### MQTT Client 
+- python3 + paho(mqtt module) 
+- [go benchmark](https://github.com/krylovsk/mqtt-benchmark)
+### Data Injest and route on GKE
+- IN : mqtt core plugin
+- OUT: gcp pub/sub plugin
