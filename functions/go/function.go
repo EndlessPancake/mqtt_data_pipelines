@@ -29,11 +29,12 @@ func HelloPubSub(ctx context.Context, m PubSubMessage) error {
 	return nil
 }
 // load Puib/Sub message to bigquery
-func WriteToBigQuery(name string) {
-
+// func WriteToBigQuery(name string) {
+func WriteToBigQuery(ctx context.Context, m PubSubMessage) {
+	
         // データ格納
         data := Data{}
-        data.Id = id
+        data.Id = string(m.Data)
         data.Datetime = time.Now()
 
         //コンテキスト取得と使用するProject指定
