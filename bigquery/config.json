@@ -1,0 +1,44 @@
+[
+ {
+   "description": "Sensor ID",
+   "name": "ID",
+   "type": "String",
+   "mode": "Required"
+ },
+ {
+   "description": "Sensor Value",
+   "name": "VALUE",
+   "type": "INTEGER",
+   "mode": "Nullable"
+ },
+ {
+   "description": "latitude",
+   "name": "LAT",
+   "type": "FLOAT64",
+   "mode": "Nullable"
+ },
+ {
+   "description": "longitude",
+   "name": "LNG",
+   "type": "FLOAT64",
+   "mode": "Nullable"
+ },
+ {
+   "description": "in C or F",
+   "name": "UNIT",
+   "type": "STRING",
+   "mode": "Nullable"
+ },
+ {
+   "description": "Sensor value type",
+   "name": "TYPES",
+   "type": "STRING",
+   "mode": "Nullable"
+ },
+  {
+   "description": "Sensor locations",
+   "name": "DESCRIPTIONS",
+   "type": "STRING",
+   "mode": "Nullable"
+ }
+]

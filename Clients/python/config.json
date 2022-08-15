@@ -1,0 +1,55 @@
+{
+    "mqtt": {
+        "username": "",
+        "password": "",
+        "host": "localhost",
+        "port": 1883,
+        "topic": "sensors"
+    },
+    "misc": {
+        "interval_ms": 100,
+        "verbose": true
+    },
+    "sensors": {
+        "Sensor 1": {
+            "lat": 35.652832,
+            "lng": 139.828491,
+            "unit": "C",
+            "types": "temperature",
+            "range": [0, 45],
+            "descriptions": "Main Entrance"
+        },
+        "Sensor 2": {
+            "lat": 35.662832,
+            "lng": 139.745411,
+            "unit": "C",
+            "types": "temperature",
+            "range": [0, 45],
+            "descriptions": "My Kitchen"
+        },
+        "Sensor 3": {
+            "lat": 35.658517,
+            "lng": 139.745493,
+            "unit": "C",
+            "types": "temperature",
+            "range": [0, 45],
+            "descriptions": "Deposit"
+        },
+        "Sensor 4": {
+            "lat": 35.6778614,
+            "lng": 139.7703167,
+            "unit": "C",
+            "types": "temperature",
+            "range": [0, 45],
+            "descriptions": "Assemlby Floor"
+        },
+        "Sensor 5": {
+            "lat": 35.652832,
+            "lng": 139.828491,
+            "unit": "C",
+            "types": "temperature",
+            "range": [0, 45],
+            "descriptions": "Tokyo Offices"
+        }
+    }
+}
